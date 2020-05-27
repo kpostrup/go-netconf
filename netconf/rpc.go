@@ -130,8 +130,28 @@ func MethodUnlock(target string) RawMethod {
 }
 
 // MethodGetConfig files a NETCONF get-config source request with the remote host
-func MethodGetConfig(source string) RawMethod {
-	return RawMethod(fmt.Sprintf("<get-config><source><%s/></source></get-config>", source))
+func MethodGetConfig(source string, filterType string, dataXml string) RawMethod {
+	return RawMethod(fmt.Sprintf("<get-config><source><%s/></source><filter type=\"%s\">%s</filter></get-config>", source, filterType, dataXml))
+}
+
+// MethodGet files a NETCONF get source request with the remote host
+func MethodGet(filterType string, dataXml string) RawMethod {
+	return RawMethod(fmt.Sprintf("<get><filter type=\"%s\">%s</filter></get>", filterType, dataXml))
+}
+
+// MethodEditConfig files a NETCONF edit-config request with the remote host
+func MethodEditConfig(database string, dataXml string) RawMethod {
+	return RawMethod(fmt.Sprintf(editConfigXml, database, dataXml))
+}
+
+// MethodDeleteConfig files a NETCONF delete-config request with the remote host
+func MethodDeleteConfig(database string) RawMethod {
+	return RawMethod(fmt.Sprintf("<delete-config><target><%s/></target></delete-config>"))
+}
+
+// MethodCommit files a NETCONF commit request with the remote host
+func MethodCommit() RawMethod {
+	return RawMethod("<commit/>")
 }
 
 // MethodGet files a NETCONF get source request with the remote host
