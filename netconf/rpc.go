@@ -154,16 +154,6 @@ func MethodCommit() RawMethod {
 	return RawMethod("<commit/>")
 }
 
-// MethodGet files a NETCONF get source request with the remote host
-func MethodGet(filterType string, dataXml string) RawMethod {
-	return RawMethod(fmt.Sprintf("<get><filter type=\"%s\">%s</filter></get>", filterType, dataXml))
-}
-
-// MethodEditConfig files a NETCONF edit-config request with the remote host
-func MethodEditConfig(database string, dataXml string) RawMethod {
-	return RawMethod(fmt.Sprintf(editConfigXml, database, dataXml))
-}
-
 var msgID = uuid
 
 // uuid generates a "good enough" uuid without adding external dependencies
